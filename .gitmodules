@@ -1,15 +1,11 @@
 [submodule "lib/bootstrap_error"]
 	path = lib/bootstrap_error
 	url = https://github.com/brycehenson/bootstrap_error.git
-[submodule "lib/fast_sorted_mask"]
-	path = lib/fast_sorted_mask
-	url = https://github.com/brycehenson/fast_sorted_mask
-[submodule "lib/matlab_funtion_cache"]
-	path = lib/matlab_funtion_cache
-	url = https://github.com/brycehenson/matlab_function_cache.git
 [submodule "bin/CIECAM02"]
 	path = bin/CIECAM02
 	url = https://github.com/DrosteEffect/CIECAM02.git
 [submodule "lib/Simple_BEC_Analysis"]
 	path = lib/Simple_BEC_Analysis
 	url = https://github.com/brycehenson/Simple_BEC_Analysis.git
+
+	
