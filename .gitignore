@@ -2,6 +2,10 @@
 *.asv
 # Data files
 *.mat
+*.dat
 # video files
 *.avi
 *.mpg
+*.mp4
+# large graphics
+*.eps
