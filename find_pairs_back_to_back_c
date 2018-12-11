@@ -1,0 +1,104 @@
+#include <math.h>
+#include <string.h>
+#include "mex.h" /* Always include this */
+
+    #define x_av prhs[0]
+    #define y_av prhs[1]
+    #define tvec prhs[2]
+    #define tt prhs[3]
+    #define xx prhs[4]
+    #define yy prhs[5]   
+    #define pairs plhs[0]
+
+void DisplayMatrix(char *Name, double *Data, int M, int N)
+{
+    int m, n;
+    mexPrintf("%s = \n", Name);
+            
+            for(m=0; m<M; m++, mexPrintf("\n"))
+                for (n = 0; n<N; n++)
+                    mexPrintf("%8.4f ", Data[m+M*n]);
+}
+
+double *find_pairs(int r22, int c, double *x_a, double *y_a, double *tvector, double *t, double *x, double *y, double *pp, const mxArray *ppp[])
+{
+    int i, j, k, r222, c222;
+    double dx, dy, dt, *p;
+    
+  for (i=0; i<=r22-2; i++) //MAKE SURE YOU USE <= NOT =
+    {
+            for (j=i+1; j<=r22-1; j++)
+         {
+                    dx=fabs(x[i]-x[j]);
+                    dy=fabs(y[i]-y[j]);
+                   
+             
+                        
+                       if (dx <= x_a[0] && dy <= y_a[0])
+                        {
+                                dt=fabs(t[i]-t[j]);
+                            
+                               for (k=0; k<=c-2; k++)
+                                {
+                                    
+                                       if(dt> tvector[k] && dt<= tvector[k+1])
+                                       {
+                                            pp[k]=pp[k]+1;
+                                           break;
+                                            
+                                        }
+                                    
+                                }
+                        
+                        
+                        
+                       }
+                
+                
+            }
+    }
+    
+ //   r222=mxGetM(ppp[2]); 
+ //   c222=mxGetN(ppp[2]);
+ //   DisplayMatrix("pp",pp,r222,c222);
+ //    mexPrintf("%8.4f ", pp[4]);
+    
+  return pp;
+}
+
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
+{
+  
+            
+            int rows, cols, r2, c2, r222, c222;
+            double *d1, *tp, *p, *x_a, *y_a, *tvector, *t, *x, *y;
+           
+            
+    //get the input dimensions
+       rows=mxGetM(tt); 
+       cols=mxGetN(tt); // this is the number of points  mexPrintf("%i",cols);
+       
+     //  mexPrintf("%i", cols); 
+       r2=mxGetM(tvec); 
+       c2=mxGetN(tvec);
+       
+       //make pointers to inputs
+       x_a=mxGetPr(x_av);
+       y_a=mxGetPr(y_av);
+       tvector=mxGetPr(tvec);
+       t=mxGetPr(tt);
+       x=mxGetPr(xx);
+       y=mxGetPr(yy);
+       
+       
+       // make an output matrix
+       pairs=mxCreateDoubleMatrix(r2,c2,mxREAL);
+       p=mxGetPr(pairs); //pointer to 'pairs'
+      
+       
+       p=find_pairs(cols,c2,x_a,y_a,tvector,t,x,y,p,prhs);
+      // mexPrintf("%8f4",p[2]); 
+       
+       return;
+       
+}
