@@ -3,4 +3,5 @@
 # Data files
 *.mat
 # video files
-*.avi,*.mpg
+*.avi
+*.mpg
