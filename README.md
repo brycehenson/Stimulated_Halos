@@ -1,6 +1,6 @@
 # Stimulated_Halos
 **Bryce M. Henson**  
-
+**Status:** This Code is **in dev and not ready to be used by others**. Unit Testing is **not** implemented.
 
 ## To Do
 - [ ] Figure out how to share common non packaged utils
